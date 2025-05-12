@@ -69,6 +69,85 @@ ou
 ```
 4. Acesse o Swagger ou utilize ferramentas como Postman.
 
+- http://localhost:8080/swagger-ui/index.html#/
+
+5. Exemplo de como testar os endpoints
+
+/filiais/login
+
+{
+  "email": "central@trackzone.com",
+  "senha": "123456"
+}
+
+---------------------------------------
+/filiais/cadastro
+
+{
+  "nome": "Filial Central",
+  "email": "central@trackzone.com",
+  "senha": "123456"
+}
+
+------------------------------------
+dashboard/filialId
+
+1
+
+---------------------------------------
+/motos/atualizar/id
+
+1
+
+{
+  "placa": "ABC-1234",
+  "chassi": "9BWZZZ377VT004251",
+  "motor": "MTR-98765",
+  "status": "Disponível",
+  "localizacao": "A3"
+}
+
+---------------------------------------
+motos/inserir
+
+{
+  "placa": "ABC-1234",
+  "chassi": "9BWZZZ377VT004251",
+  "motor": "MTR-98765",
+  "status": "Disponível",
+  "localizacao": "A2"
+}
+
+-----------------------------------------
+/motos/id
+
+1
+
+-------------------------------------------
+/motos/todas_cacheable
+
+execute
+
+-----------------------------------------
+/motos/status
+
+Disponível
+
+0
+
+5
+
+-----------------------------------------
+/motos/paginadas
+
+0
+
+5
+
+----------------------------------------
+/motos/remover/id
+
+1
 ---
 
 ## 🗃️ Banco de Dados
@@ -88,7 +167,7 @@ ou
 ```
   trackzone/
   ├── config/
-  ├── control/
+  ├── controller/
   ├── dto/
   ├── exception/
   ├── model/
@@ -107,13 +186,16 @@ ou
 ```
 | Método | Endpoint               | Descrição                                |
 | ------ | ---------------------- | ---------------------------------------- |
-| GET    | /motos/todas           | Lista todas as motos (com cache)         |
-| GET    | /motos/paginadas       | Lista paginada de motos                  |
-| GET    | /motos/status?status=X | Filtra motos por status                  |
-| POST   | /motos/inserir         | Cadastra nova moto                       |
+| POST   | /filiais/login         | Logar na conta                           |
+| POST   | /filiais/cadastro      | Cadastrar nova conta                     |
+| GET    | /dashboard/filialId    | Lista a filial pelo ID                   |
 | PUT    | /motos/atualizar/{id}  | Atualiza moto por ID                     |
+| POST   | /motos/inserir         | Cadastra nova moto                       |
+| GET    | /motos/id              | Lista moto por id                        |
+| GET    | /motos/todas_cacheable | Mostra motos em cache                    |
+| GET    | /motos/status          | Filtra motos por status                  |
+| GET    | /motos/paginadas       | Lista paginada de motos                  |
 | DELETE | /motos/remover/{id}    | Remove moto por ID                       |
-| GET    | /filiais               | Lista todas as filiais (se implementado) |
 
 ```
 - |⚠️ Todos os endpoints (exceto públicos) requerem autenticação básica.
