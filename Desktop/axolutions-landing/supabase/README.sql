@@ -1,0 +1,22 @@
+-- INSTRUÇÕES DE USO DOS SCRIPTS SQL
+--
+-- Execute os scripts na seguinte ordem:
+--
+-- 1. 01-schema.sql - Cria as tabelas e estruturas básicas
+-- 2. 02-functions-triggers.sql - Cria funções e triggers
+-- 3. 03-security-policies.sql - Configura políticas de segurança (RLS)
+-- 4. 04-admin-functions.sql - Adiciona funções para gerenciamento de administradores
+-- 5. 05-seed-data.sql - (Opcional) Insere dados iniciais para testes
+--
+-- NOTAS IMPORTANTES:
+--
+-- - Para criar um usuário administrador em produção, use a função promote_to_admin:
+--   SELECT promote_to_admin('email_do_usuario@exemplo.com');
+--
+-- - A função create_admin_user deve ser usada APENAS em ambiente de desenvolvimento
+--   pois manipula diretamente a tabela auth.users
+--
+-- - Certifique-se de que as extensões uuid-ossp e pgcrypto estão habilitadas
+--
+-- - Após executar os scripts, verifique se as políticas RLS estão funcionando corretamente
+--   testando o acesso com diferentes tipos de usuários
