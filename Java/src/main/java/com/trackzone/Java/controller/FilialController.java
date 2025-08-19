@@ -6,21 +6,26 @@ import com.trackzone.Java.dto.LoginDTO;
 import com.trackzone.Java.model.Filial;
 import com.trackzone.Java.repository.FilialRepository;
 import com.trackzone.Java.security.JWTUtil;
+import com.trackzone.Java.service.FilialService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 
 @RestController
 @RequestMapping("/filiais")
 @Tag(name = "Filiais", description = "Endpoints para cadastro e autenticação de filiais")
 public class FilialController {
 
+	@Autowired
+	private FilialService filialService;
+	
     @Autowired
     private FilialRepository filialRepository;
 
@@ -45,7 +50,17 @@ public class FilialController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Filial> updateFilial(@PathVariable Long id, @RequestBody Filial filial) {
+        Filial updated = filialService.update(id, filial);
+        return ResponseEntity.ok(updated);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFilial(@PathVariable Long id) {
+        filialService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
     @Operation(summary = "Login da filial com JWT")
